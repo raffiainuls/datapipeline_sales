@@ -1,0 +1,31 @@
+database:
+  host: localhost
+  port: 5433 
+  name: postgres 
+  user: postgres 
+  password: postgres 
+
+
+csv_files:
+  - file: tbl_branch.csv
+    table: tbl_branch 
+  - file: tbl_customers.csv 
+    table: tbl_customers
+  - file: tbl_employee.csv 
+    table: tbl_employee
+  - file: tbl_order_status.csv 
+    table: tbl_order_status
+  - file: tbl_payment_method.csv 
+    table: tbl_payment_method 
+  - file: tbl_payment_status.csv 
+    table: tbl_payment_status 
+  - file: tbl_product.csv 
+    table: tbl_product
+  - file: tbl_promotions.csv 
+    table: tbl_promotions 
+  - file: tbl_sales.csv 
+    table: tbl_sales 
+  - file: tbl_schedulle_employee.csv 
+    table: tbl_schedulle_employee
+  - file: tbl_shipping_status.csv 
+    table: tbl_shipping_status

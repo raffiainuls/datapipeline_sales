@@ -1,0 +1,10 @@
+pyyaml 
+pandas 
+sqlalchemy 
+cryptography
+pymysql
+pyodbc
+pymssql
+jaydebeapi
+pymongo
+oracledb

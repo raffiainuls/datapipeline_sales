@@ -1,0 +1,16 @@
+.idea
+venv
+logs
+__pycache__
+backup_lib-flink/
+backup_lib-flink_3_08_2025/
+data_clickhouse/
+mysql_data/
+oracle-data/
+mongodb_data/
+sqlserver_data/
+lib-flink/flink-dist-1.19.3.jar
+
+# Ignore big logs
+*.log
+*.gdmp

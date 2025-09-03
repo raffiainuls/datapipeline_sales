@@ -1,0 +1,17 @@
+FROM apache/spark:3.5.6
+
+USER root
+
+# Install python3 dan pip
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip && \
+    ln -s /usr/bin/python3 /usr/bin/python
+
+# Install pyspark dan libs tambahan
+RUN pip install pyspark==3.5.6 pandas pyarrow dotenv clickhouse_driver
+
+# Kembali ke direktori kerja Spark
+WORKDIR /opt/spark
+
+# Ganti kembali ke user non-root bawaan Spark
+USER 185

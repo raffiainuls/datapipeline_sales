@@ -1,0 +1,60 @@
+database_postgres:
+  host: localhost
+  port: 5433 
+  name: postgres 
+  user: postgres 
+  password: postgres 
+
+database_mysql:
+  host: localhost
+  port: 3306
+  name: salesdb
+  user: mysql 
+  password: pass 
+
+database_sqlserver:
+  host: host.docker.internal
+  port: 1433
+  name: salesdb
+  user: sa 
+  password: Sql@123456 
+
+database_mongodb:
+  host: localhost
+  port: 27017
+  database: salesdb
+  collection: tbl_sales
+  username: root 
+  password: rootpass 
+
+database_oracle:
+  host: localhost
+  port: 1521
+  service_name: XE
+  username: C##CDC
+  password: password
+
+
+csv_files:
+  - file: tbl_branch.csv
+    table: tbl_branch 
+  - file: tbl_customers.csv 
+    table: tbl_customers
+  - file: tbl_employee.csv 
+    table: tbl_employee
+  - file: tbl_order_status.csv 
+    table: tbl_order_status.csv 
+  - file: tbl_payment_method.csv 
+    table: tbl_payment_method 
+  - file: tbl_payment_status.csv 
+    table: tbl_payment_status 
+  - file: tbl_product.csv 
+    table: tbl_product
+  - file: tbl_promotions.csv 
+    table: tbl_promotions 
+  - file: tbl_sales.csv 
+    table: tbl_sales 
+  - file: tbl_schedulle_employee.csv 
+    table: tbl_schedulle_employee
+  - file: tbl_shipping_status.csv 
+    table: tbl_shipping_status
