@@ -1,5 +1,8 @@
 ## Data pipeline Sales 
 
+<img width="1116" height="352" alt="image" src="https://github.com/user-attachments/assets/b3ccfc4b-425f-44cd-a63e-133801ad2777" />
+
+
 #### Overview 
 This project is data pipeline project that leverange kafka, flink for realtime streaming data and Apache Spark and Airflow for orchestrating batch and scheduled workflows. the project generates synthetic sales data, this project using some data sources database, PostgreSQL, Mysql, Oracle, SQL Server, and MongoDB. There is Python Generates data that stream data into data sources. data from any data source will send into kafka with connector kafka connect to store at each kafka topics. There is flink job that will cleaning and merge data transactions for each data source into one topics. and then this topic will be sink into hadoop with parquet format. from hadoop there is some spark jobs that execute query for create table dimension and then sink into clickhouse database. at the end this project show dashbord sales that showing sales performance from table clickhouse.
 
@@ -43,5 +46,21 @@ and then running all every flink job to cleanning and merge data transaction  `m
 ```bash
 flink run -py /opt/flink/job/mysql.py
 ```
-9. 
+9. after running all flink job to cleanning and merge data transaction the data transaction actually merge in one topic namely transactions and the next step we can sink data in kafka topics into hadoop with parquet format running job `/flink-job/sink_transactions.py` to sink all data transaction in topic transaction into hadoop
+```bash
+HADOOP_USER_NAME=flink  flink run -py /opt/flink/job/sink_transactions.py
+```
+10. after sink data transaction in kafka into hadoop actually we can also sink table reference in topic kafka to hadoop. some flink job is `sink_tbl_branch.py`, `sink_tbl_customers.py`, `sink_tbl_employee.py`, `sink_tbl_order_status.py`, `sink_tbl_payment_method.py`, `sink_tbl_payment_status.py`, `sink_tbl_product.py`, `sink_tbl_promotions.py`, `sink_tbl_schedulle_employee.py`, `sink_tbl_shipping_status.py` use this sample command to run job flink
+```bash
+HADOOP_USER_NAME=flink  flink run -py /opt/flink/job/sink_tbl_payment_method.py
+```
+11. after all data already available in hadoop next step is running some spark job to execute query table dimension and sink into clickhouse table all spark job there is in directory `/spark-apps/`, and this directory also volume mapped in container spark. actualy all spark-job load data from hadoop and then using sql  run query to create table dimension and then sink into clickhouse table. to run spark job we should go in container and then running the job like this:
+```bash
+docker exec -it spark-master bash
+cd spark-apps
+HADOOP_USER_NAME=flink PYTHONPATH=. spark-submit fact_sales/main.py
+```
+12. actually this project using airflow to schedulled spark job so we dont need run spark job manually, just cek in airflow web server actually in `http://localhost:8082` and check in airflow there should be already 2 dags `daily_datapipeline` and also `static_datapipeline` for `daily_datapipeline` you just need to run schedulle and this job will schedulle every day, but for `static_datapipeline` it job should run once and because this job running table reference
+    
+
 
